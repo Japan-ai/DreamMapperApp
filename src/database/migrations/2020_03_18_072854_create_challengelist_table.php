@@ -30,6 +30,6 @@ class CreateChallengelistTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('=challengelist');
+        Schema::dropIfExists('challengelist');
     }
 }
