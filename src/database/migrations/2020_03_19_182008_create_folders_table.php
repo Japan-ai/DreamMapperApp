@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateChallengelistTable extends Migration
+class CreateFoldersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateChallengelistTable extends Migration
      */
     public function up()
     {
-        Schema::create('challengelist', function (Blueprint $table) {
+        Schema::create('folders', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title', 100);//追加
-            $table->integer('status')->default(1);//追加
-            $table->softDeletes();//追加
-            $table->date('due_date');//追加
+            $table->string('title', 20);//追加
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ class CreateChallengelistTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('challengelist');
+        Schema::dropIfExists('folders');
     }
 }
