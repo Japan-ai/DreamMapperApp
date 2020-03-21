@@ -20,8 +20,7 @@
         <nav class="panel panel-default">
           <div class="panel-heading">分類フォルダ</div>
           <div class="panel-body">
-            <a href="#" class="btn btn-default btn-block">
-              フォルダを追加する
+            <a href="{{ route('folders.create') }}" class="btn btn-default btn-block">フォルダを追加
             </a>
           </div>
           <div class="list-group">
@@ -36,7 +35,40 @@
         </nav>
       </div>
       <div class="column col-md-6">
-        <!-- ここにタスクが表示される -->
+        <!-- 下記にチャレンジリストが表示される -->
+        <div class="panel panel-default">
+          <div class="panel-heading">タスク</div>
+          <div class="panel-body">
+            <div class="text-right">
+              <a href="#" class="btn btn-default btn-block">
+        リストを追加
+              </a>
+            </div>
+          </div>
+          <table class="table">
+            <thead>
+            <tr>
+              <th>新規チェレンジ項目</th>
+              <th>実行ステータス</th>
+              <th>期限</th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+              @foreach($challengelist as $challengelist)
+                <tr>
+                  <td>{{ $challengelist->title }}</td>
+                  <td>
+                  <span class="label {{ $challengelist->status_class }}">{{ $challengelist->status_label }}</span></span>
+                  </td>
+                  <td>{{ $challengelist->formatted_due_date }}</td>
+                  <td><a href="#">編集する</a></td>
+                </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+        <!-- 上記にチャレンジリストが表示される -->
       </div>
     </div>
   </div>
