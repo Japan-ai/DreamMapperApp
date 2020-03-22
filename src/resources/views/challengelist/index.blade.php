@@ -53,7 +53,7 @@
                   <span class="label {{ $challengelist->status_class }}">{{ $challengelist->status_label }}</span>
                 </td>
                 <td>{{ $challengelist->formatted_due_date }}</td>
-                <td><a href="#">編集</a></td>
+                <td><a href="{{ route('challengelist.edit', ['id' => $challengelist->folder_id, 'challengelist_id' => $challengelist->id]) }}">編集</a></td>
               </tr>
             @endforeach
             </tbody>

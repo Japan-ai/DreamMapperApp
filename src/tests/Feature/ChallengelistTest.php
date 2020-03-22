@@ -13,7 +13,7 @@ class ChallengelistTest extends TestCase
     use RefreshDatabase;
 
     /**
-     * 各テストメソッドの実行前に呼ばれるsetUp メソッドでシーダーを実行
+     * 各テストメソッドの実行前に呼ばれるsetUpメソッドでシーダーを実行
      */
     public function setUp()
     {
@@ -23,6 +23,8 @@ class ChallengelistTest extends TestCase
         $this->seed('FoldersTableSeeder');
     }
 
+
+    // 1 「チャレンジリスト新規作成時」の「期日選択」に関するバリデーションテスト
     /**
      * 期限日が日付ではない場合はエラー
      * @test
@@ -38,7 +40,6 @@ class ChallengelistTest extends TestCase
             'due_date' => '期限日 には日付を入力してください。',
         ]);
     }
-
     /**
      * 期限日が過去日付の場合はエラー
      * @test
@@ -53,5 +54,28 @@ class ChallengelistTest extends TestCase
         $response->assertSessionHasErrors([
             'due_date' => '期限日 には今日以降の日付を入力してください。',
         ]);
+    }
+
+
+
+    // 2 「チャレンジリスト編集時」の「実行ステータス」に関するバリデーションテスト
+    /**
+    * 実行ステータスが定義された値ではない場合はバリデーションエラー
+    * @test
+    */
+    public function status_should_be_within_defined_numbers()
+    {
+      $this->seed('ChallengeListTableSeeder');
+
+      $response = $this->post('/folders/1/challengelist/1/edit', [
+        'title' => 'Sample challengelist',
+        'due_date' => Carbon::today()->format('Y/m/d'),
+        'status' => 999,
+      ]);
+
+      //不正入力の場合はエラーメッセージを表示
+      $response->assertSessionHasErrors([
+          'status' => '実行ステータス には 未着手、作業中、完了 のいずれかを指定してください。',
+      ]);
     }
 }

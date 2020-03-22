@@ -30,6 +30,7 @@ class CreateChallengelist extends FormRequest
             'due_date' => 'required|date|after_or_equal:today',
         ];
     }
+    
     public function attributes()
     {
         return [
