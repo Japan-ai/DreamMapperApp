@@ -19,7 +19,7 @@
     </filter>
     <php>
         <server name="APP_ENV" value="testing"/>
-        <!-- 新規チャレンジリスト追加時の期日設定に関するテスト-->
+        <!-- 新規チャレンジリスト追加時の期日設定に関するバリデーションテスト-->
         <env name="DB_CONNECTION" value="sqlite_testing"/> 
         <server name="BCRYPT_ROUNDS" value="4"/>
         <server name="CACHE_DRIVER" value="array"/>

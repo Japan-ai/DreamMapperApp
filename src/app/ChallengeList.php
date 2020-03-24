@@ -3,14 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Carbon\Carbon;//追加
+use Carbon\Carbon;//追加,Carbonライブラリの読み込み
 
 class ChallengeList extends Model
 {
-    use SoftDeletes;
-
+    //アクセサの追加
     /**
-    * 実行ステータスの定義
+    * 実行ステータスの色分け
     */
     const STATUS = [
       1 => [ 'label' => '未着手', 'class' => 'label-danger' ],
@@ -25,22 +24,25 @@ class ChallengeList extends Model
   public function getStatusLabelAttribute()
   {
       // 実行ステータスの値
-      $status = $this->attributes['status'];
+      $status = $this->status;
 
-      // 定義されていなければ空文字を返す
-      if (!isset(self::STATUS[$status])) {
-          return '';
-      }
-
+      //実行ステータスが定義されて入れば、ラベルの色を返す
+      if (isset(self::STATUS[$status])) {
+      
       return self::STATUS[$status]['class'];
-  }
-  /**
+      }
+    }
+    
+  
+    //アクセサの追加
+    /**
     * 期日の表示方法の修正
     * @return string
     */
+    //期限日の記述形式を変更して値を返す
   public function getFormattedDueDateAttribute()
   {
-      return Carbon::createFromFormat('Y-m-d', $this->attributes['due_date'])
+      return Carbon::createFromFormat('Y-m-d', $this->due_date)
             ->format('Y/m/d');
     }
 }

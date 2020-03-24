@@ -13,7 +13,7 @@ class ChallengelistTest extends TestCase
     use RefreshDatabase;
 
     /**
-     * 各テストメソッドの実行前に呼ばれるsetUpメソッドでシーダーを実行
+     * 各テストメソッドの実行前に呼ばれるsetUpメソッドで、シーダーを実行
      */
     public function setUp()
     {
@@ -33,7 +33,7 @@ class ChallengelistTest extends TestCase
     {
         $response = $this->post('/folders/1/challengelist/create', [
             'title' => 'Sample challengelist',
-            'due_date' => 123, // エラーになる不正なデータ（数値）を指定
+            'due_date' => 123, // エラーになる不正なデータとして数値を指定
         ]);
 
         $response->assertSessionHasErrors([
@@ -46,11 +46,12 @@ class ChallengelistTest extends TestCase
      */
     public function due_date_should_not_be_past()
     {
+        //post メソッドでタスク作成ルートにアクセス, エラー入力を$response変数が受け取る
         $response = $this->post('/folders/1/challengelist/create', [
             'title' => 'Sample challengelist',
-            'due_date' => Carbon::yesterday()->format('Y/m/d'), // エラーになる不正なデータ（昨日の日付）を指定
+            'due_date' => Carbon::yesterday()->format('Y/m/d'), // エラーになる不正なデータとして昨日の日付を指定
         ]);
-        //$response変数に対して、assertSessionHasErrorsメソッドでエラーメッセージがあることを確かめる
+        //エラー入力を受け取った$response変数に対して、assertSessionHasErrorsメソッドでエラーメッセージがあることを確かめる
         $response->assertSessionHasErrors([
             'due_date' => '期限日 には今日以降の日付を入力してください。',
         ]);
@@ -58,7 +59,7 @@ class ChallengelistTest extends TestCase
 
 
 
-    // 2 「チャレンジリスト編集時」の「実行ステータス」に関するバリデーションテスト
+    // 2 「チャレンジリスト編集時」の「実行ステータスセレクトボックス」に関するバリデーションテスト
     /**
     * 実行ステータスが定義された値ではない場合はバリデーションエラー
     * @test

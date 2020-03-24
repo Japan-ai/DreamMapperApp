@@ -23,7 +23,7 @@ Auth::routes();
 //ホーム画面の表示
 Route::get('/home', 'HomeController@index')->name('home');
 
-//分類フォルダとチャレンジリストの連携・画面表示
+//分類フォルダとチャレンジリストの同時画面表示
 Route::get('/folders/{id}/challengelist', 'ChallengeListController@index')->name('challengelist.index');
 
 //分類フォルダ新規作成ページの表示

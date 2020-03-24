@@ -27,16 +27,16 @@
               <div class="form-group">
                 <label for="title">タイトル</label>
                 <!-- 編集ページを開いた時は、タスクを作成時のタイトルを入力欄へ表示。値を変更して送信したが入力エラーで戻った時は、変更後の値を入力欄へ表示。 -->
-                <!-- value属性 直前の入力値をデフォルト値に設定 -->
+                <!-- value属性 - 直前の入力値をデフォルト値に設定,第二引数がデフォルト値 -->
                 <input type="text" class="form-control" name="title" id="title"
                        value="{{ old('title') ?? $challengelist->title }}" />
               </div>
               <div class="form-group">
                 <label for="status">実行ステータス</label>
-                <!-- ChallengeListモデルで定義した配列定数STATUSを@foreachでループしてoption要素を出力。option要素のvalueに配列のキー（1, 2, 3）を、タグで囲んだ表示文字列には'label'の値を出力 -->
+                <!-- 実行ステータス入力欄はセレクトボックス, ChallengeListモデルで定義した配列定数STATUSを@foreachでループしてoption要素を出力 -->
                 <select name="status" id="status" class="form-control">
                   @foreach(\App\ChallengeList::STATUS as $key => $val)
-                    <!-- ループしたキーとold('status', $challengelist->status)（直前の入力値またはデータベースに登録済の値）を比べて、一致する場合に optionタグの中に'selected'を出力 -->
+                    <!-- $key == old('status'では、「ループしたキー」と「直前の入力値またはデータベースに登録済の値」を比べて、一致する場合はoption要素のvalueに配列のキー（1, 2, 3）を出力、表示文字列には'label'の値を出力 -->
                     <option
                         value="{{ $key }}"
                         {{ $key == old('status', $challengelist->status) ? 'selected' : '' }}
@@ -48,6 +48,7 @@
               </div>
               <div class="form-group">
                 <label for="due_date">期限</label>
+                 <!-- value属性では、「ループしたキー」と「直前の入力値またはデータベースに登録済の値」を比べて、一致する場合は値を出力 -->
                 <input type="text" class="form-control" name="due_date" id="due_date"
                        value="{{ old('due_date') ?? $challengelist->formatted_due_date }}" />
               </div>
