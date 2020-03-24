@@ -1,8 +1,8 @@
 @extends('layout')
 
 @section('styles')
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-  <link rel="stylesheet" href="https://npmcdn.com/flatpickr/dist/themes/material_blue.css">
+  <!-- 共通部分 styles.blade.phpを呼び出し-->
+  @include('share.flatpickr.styles')
 @endsection
 
 @section('content')
@@ -14,6 +14,7 @@
           <!-- 下記 フォルダの新規作成時の入力エラーメッセージの表示 -->
           <div class="panel-body">
             <!-- @if($errors->any())で入力内容にエラーがあるか確認 -->
+            
             @if($errors->any())
               <div class="alert alert-danger">
                 <!-- エラーがある場合は、エラーメッセージを列挙 -->
@@ -22,6 +23,7 @@
                 @endforeach
               </div>
             @endif
+
             <!-- 上記 フォルダの新規作成時の入力エラーメッセージの表示 -->
             <form action="{{ route('challengelist.create', ['id' => $folder_id]) }}" method="POST">
               @csrf
@@ -46,14 +48,6 @@
 @endsection
 
 @section('scripts')
-  <script src="https://npmcdn.com/flatpickr/dist/flatpickr.min.js"></script>
-  <script src="https://npmcdn.com/flatpickr/dist/l10n/ja.js"></script>
-  <script>
-    //本日より過去の日付を入力できない設定
-    flatpickr(document.getElementById('due_date'), {
-      locale: 'ja',
-      dateFormat: "Y/m/d",
-      minDate: new Date()
-    });
-  </script>
+  <!-- 共通部分 scripts.blade.phpを呼び出し-->
+  @include('share.flatpickr.scripts')
 @endsection

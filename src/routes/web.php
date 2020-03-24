@@ -17,7 +17,6 @@ Route::get('/', function () {
     return view('home');
 });
 
-
 Auth::routes();
 
 //ホーム画面の表示

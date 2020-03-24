@@ -17,6 +17,14 @@ class ChallengeList extends Model
       3 => [ 'label' => '完了', 'class' => '' ],
   ];
 
+    /**
+     * モデルと関連しているテーブル
+     *
+     * @var string
+     */
+    protected $table = 'challengelist';
+  
+
   /**
    * 実行ステータスを表すHTMLクラス
    * @return string
@@ -26,12 +34,9 @@ class ChallengeList extends Model
       // 実行ステータスの値
       $status = $this->status;
 
-      //実行ステータスが定義されて入れば、ラベルの色を返す
-      if (isset(self::STATUS[$status])) {
-      
+      //実行ステータスラベルの色を返す
       return self::STATUS[$status]['class'];
-      }
-    }
+  }
     
   
     //アクセサの追加

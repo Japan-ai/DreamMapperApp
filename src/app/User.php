@@ -36,4 +36,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    //hasManyメソッドを使用して、Folderモデル(テーブル)とUserモデル(テーブル)の1対多のリレーションを定義
+    //FolderテーブルとUserテーブルの関連性をたどって、Folderクラスのインスタンスから紐づくUserクラスのデータを返す
+    public function folders()
+    {
+        return $this->hasMany('App\Folder');
+    }
 }

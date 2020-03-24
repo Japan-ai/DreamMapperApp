@@ -13,6 +13,9 @@ class FoldersTableSeeder extends Seeder
     //学び, 健康, 時間の３つのフォルダを作成。
     public function run()
     {
+        //firstメソッドでユーザーを一行だけ取得して、そのIDをuser_idの値に指定
+        $user = DB::table('users')->first();
+        
         $titles = ['学び', '健康', '時間'];
 
         foreach ($titles as $title) {

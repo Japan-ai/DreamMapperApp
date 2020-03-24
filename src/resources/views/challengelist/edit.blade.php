@@ -12,17 +12,18 @@
         <nav class="panel panel-default">
           <div class="panel-heading">チャレンジリストの編集</div>
           <div class="panel-body">
+
             @if($errors->any())
               <div class="alert alert-danger">
-                @foreach($errors->all() as $message)
+                @foreach ($errors->all() as $message)
                   <p>{{ $message }}</p>
                 @endforeach
               </div>
             @endif
+
             <form
                 action="{{ route('challengelist.edit', ['id' => $challengelist->folder_id, 'challengelist_id' => $challengelist->id]) }}"
-                method="POST"
-            >
+                method="POST">
               @csrf
               <div class="form-group">
                 <label for="title">タイトル</label>
@@ -39,8 +40,7 @@
                     <!-- $key == old('status'では、「ループしたキー」と「直前の入力値またはデータベースに登録済の値」を比べて、一致する場合はoption要素のvalueに配列のキー（1, 2, 3）を出力、表示文字列には'label'の値を出力 -->
                     <option
                         value="{{ $key }}"
-                        {{ $key == old('status', $challengelist->status) ? 'selected' : '' }}
-                    >
+                        {{ $key == old('status', $challengelist->status) ? 'selected' : '' }}>
                       {{ $val['label'] }}
                     </option>
                   @endforeach
