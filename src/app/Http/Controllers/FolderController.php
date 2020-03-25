@@ -5,6 +5,7 @@ namespace App\Http\Controllers;//追加
 use App\Folder;//追加
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateFolder;//追加
+use Illuminate\Support\Facades\Auth;//追加
 
 class FolderController extends Controller
 {
@@ -24,8 +25,8 @@ class FolderController extends Controller
     $folder = new Folder();
     // 入力された値をタイトルへ代入
     $folder->title = $request->title;
-    // インスタンスの状態をデータベースに保存・書き込み, モデルクラスのプロパティに代入した値が各カラムに書き込まる
-    $folder->save();
+    //Auth::user()で現在認証されているユーザーを確認, インスタンスの状態を、ログインしたユーザーのデータとしてデータベースに保存・書き込み, モデルクラスのプロパティに代入した値が各カラムに書き込まる
+    Auth::user()->folders()->save($folder);
 
     //challengelistフォルダ直下のindex.blade.phpに、第二引数のデータを渡す, redirectメソッドを使用して、フォルダの新規作成が終わったら、そのフォルダに対応するチャレンジリスト一覧画面に移動
     return redirect()->route('challengelist.index', [
