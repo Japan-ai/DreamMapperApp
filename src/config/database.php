@@ -33,7 +33,14 @@ return [
     |
     */
 
+    //追加, カレンダーを使用した期日設定のバリデーションテスト
     'connections' => [
+        // 新規チャレンジリスト作成時の期日設定に関するテスト
+        'sqlite_testing' => [
+        'driver' => 'sqlite',
+        'database' => ':memory:',
+        'prefix' => '',
+        ],
 
         'sqlite' => [
             'driver' => 'sqlite',
