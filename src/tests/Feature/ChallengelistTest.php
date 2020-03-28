@@ -15,7 +15,7 @@ class ChallengelistTest extends TestCase
     /**
      * 各テストメソッドの実行前に呼ばれるsetUpメソッドで、シーダーを実行
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -49,7 +49,8 @@ class ChallengelistTest extends TestCase
         //post メソッドでタスク作成ルートにアクセス, エラー入力を$response変数が受け取る
         $response = $this->post('/folders/1/challengelist/create', [
             'title' => 'Sample challengelist',
-            'due_date' => Carbon::yesterday()->format('Y/m/d'), // エラーになる不正なデータとして昨日の日付を指定
+            
+            'due_date' => Carbon::yesterday()->format('Y/m/d'), 
         ]);
         //エラー入力を受け取った$response変数に対して、assertSessionHasErrorsメソッドでエラーメッセージがあることを確かめる
         $response->assertSessionHasErrors([

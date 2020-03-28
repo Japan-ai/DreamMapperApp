@@ -21,6 +21,7 @@ class FoldersTableSeeder extends Seeder
         foreach ($titles as $title) {
             DB::table('folders')->insert([
                 'title' => $title,
+                'user_id' => $user->id,
                 //Carbonライブラリを使用して現在日時を入力
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),

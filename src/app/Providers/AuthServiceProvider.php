@@ -11,7 +11,6 @@ class AuthServiceProvider extends ServiceProvider
 {
     //モデルクラスとポリシークラスを紐づけ
     /**
-     * The policy mappings for the application.
      *
      * @var array
      */
@@ -21,7 +20,6 @@ class AuthServiceProvider extends ServiceProvider
     ];
 
     /**
-     * Register any authentication / authorization services.
      *
      * @return void
      */

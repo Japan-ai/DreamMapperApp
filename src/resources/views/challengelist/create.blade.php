@@ -14,7 +14,7 @@
           <!-- 下記 フォルダの新規作成時の入力エラーメッセージの表示 -->
           <div class="panel-body">
             <!-- @if($errors->any())で入力内容にエラーがあるか確認 -->
-            
+
             @if($errors->any())
               <div class="alert alert-danger">
                 <!-- エラーがある場合は、エラーメッセージを列挙 -->
@@ -25,7 +25,7 @@
             @endif
 
             <!-- 上記 フォルダの新規作成時の入力エラーメッセージの表示 -->
-            <form action="{{ route('challengelist.create', ['id' => $folder_id]) }}" method="POST">
+            <form action="{{ route('challengelist.create', ['folder' => $folder_id]) }}" method="POST">
               @csrf
               <div class="form-group">
                 <label for="title">タイトル</label>

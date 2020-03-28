@@ -30,7 +30,7 @@ class FolderController extends Controller
 
     //challengelistフォルダ直下のindex.blade.phpに、第二引数のデータを渡す, redirectメソッドを使用して、フォルダの新規作成が終わったら、そのフォルダに対応するチャレンジリスト一覧画面に移動
     return redirect()->route('challengelist.index', [
-        'id' => $folder->id,
+        'folder' => $folder->id,
     ]);
 }
 }

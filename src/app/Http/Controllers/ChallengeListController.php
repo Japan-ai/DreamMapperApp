@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;//追加
 
-use App\Folder;//追加
-use App\ChallengeList;//追加
+use App\Folder;
 use App\Http\Requests\CreateChallengelist;//追加
+use App\Http\Requests\EditChallengelist;//追加
+use App\ChallengeList;//追加
 use Illuminate\Support\Facades\Auth;//追加
 use Illuminate\Http\Request;
 
@@ -12,10 +13,14 @@ class ChallengeListController extends Controller
 {
 
   //チャレンジリストの画面表示に関するメソッド
+  /**
+  * @param Folder $folder
+  * @return \Illuminate\View\View
+  */
   public function index(Folder $folder)
   {
       // Authモデルのuserクラスメソッドで、ログインしたユーザーが持つすべてのフォルダデータをデータベースから取得
-      $challengelist = Auth::user()->folders()->get();
+      $folders = Auth::user()->folders()->get();
       // 選択されたフォルダに紐付くチャレンジリストを取得する
       //ルーティング定義のURLの中括弧で囲まれたキーワード{folder}とコントローラーメソッドの仮引数名$folderが一致、かつ引数が型指定Folderされているので、自動的に引数の型のモデルクラスインスタンスを作成。ルートとモデルを結びつけるバインディングで、URLエラー時はレスポンスステータスコードを表示
       $challengelist = $folder->challengelist()->get();
@@ -31,6 +36,10 @@ class ChallengeListController extends Controller
   }
 
   //チャレンジリストの新規作成画面表示に関するメソッド
+  /**
+  * @param Folder $folder
+  * @return \Illuminate\View\View
+  */
   public function showCreateForm(Folder $folder)
   {
       //ルーティング定義のURLの中括弧で囲まれたキーワード{folder}とコントローラーメソッドの仮引数名$folderが一致、かつ引数が型指定Folderされているので、自動的に引数の型のモデルクラスインスタンスを作成。ルートとモデルを結びつけるバインディングで、URLエラー時はレスポンスステータスコードを表示
@@ -41,6 +50,11 @@ class ChallengeListController extends Controller
   }
 
   //チャレンジリストの新規作成処理・保存に関するメソッド
+  /**
+  * @param Folder $folder
+  * @param CreateChallengelist $request
+  * @return \Illuminate\Http\RedirectResponse
+  */
   public function create(Folder $folder, CreateChallengelist $request)
   {
     //チャレンジリストモデルのインスタンスを作成
@@ -54,11 +68,16 @@ class ChallengeListController extends Controller
     //ルーティング定義のURLの中括弧で囲まれたキーワード{folder}とコントローラーメソッドの仮引数名$folderが一致、かつ引数が型指定Folderされているので、自動的に引数の型のモデルクラスインスタンスを作成。ルートとモデルを結びつけるバインディングで、URLエラー時はレスポンスステータスコードを表示
     //challengelistフォルダ直下のindex.blade.phpに、第二引数のデータを渡す, redirectメソッドを使用して、チャレンジリストの新規作成が終わったら、そのフォルダに対応するチャレンジリスト一覧画面に移動
     return redirect()->route('challengelist.index', [
-        'id' => $folder->id,
+        'folder' => $folder->id,
     ]);
   }
 
   //チャレンジリストの編集画面表示に関するメソッド
+  /**
+   * @param Folder $folder
+   * @param Challengelist $challengelist
+   * @return \Illuminate\View\View
+   */
   public function showEditForm(Folder $folder, Challengelist $challengelist)
   {
     //他者がチャレンジリストIDを編集できない設定にするため、フォルダとチャレンジリストの紐づきを確認
@@ -73,6 +92,12 @@ class ChallengeListController extends Controller
   //チャレンジリストの編集処理に関するメソッド
   //リクエストされたIDでchallengelistデータを取得＝編集対象を取得
   //ルーティング定義のURLの中括弧で囲まれたキーワード{folder}とコントローラーメソッドの仮引数名$folderが一致、かつ引数が型指定Folderされているので、自動的に引数の型のモデルクラスインスタンスを作成。ルートとモデルを結びつけるバインディングで、URLエラー時はレスポンスステータスコードを表示
+     /**
+     * @param Folder $folder
+     * @param Challengelist $challengelist
+     * @param EditChallengelist $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
   public function edit(Folder $folder, Challengelist $challengelist, EditChallengelist $request)
 {
     
@@ -87,14 +112,19 @@ class ChallengeListController extends Controller
 
     // 編集後は、編集対象のchallengelistが属するリスト一覧画面へリダイレクト
     return redirect()->route('challengelist.index', [
-        'id' => $challengelist->folder_id,
+        'folder' => $challengelist->folder_id,
     ]);
   }
 
-  // リレーションが存在しない場合の404エラー表示のための実装
+  // フォルダとタスクの関連性があるか調べ、リレーションが存在しない場合の404エラー表示のための実装
+  /**
+  * @param Folder $folder
+  * @param Challengelist $challengelist
+  */
   private function checkRelation(Folder $folder, Challengelist $challengelist)
 {
     if ($folder->id !== $challengelist->folder_id) {
         abort(404);
     }
+}
 }

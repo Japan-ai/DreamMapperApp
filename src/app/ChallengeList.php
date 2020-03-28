@@ -26,7 +26,7 @@ class ChallengeList extends Model
   
 
   /**
-   * 実行ステータスを表すHTMLクラス
+   * 実行ステータスを表すHTMLクラス(ラベル)
    * @return string
    */
   public function getStatusLabelAttribute()
@@ -50,4 +50,9 @@ class ChallengeList extends Model
       return Carbon::createFromFormat('Y-m-d', $this->due_date)
             ->format('Y/m/d');
     }
+
+  public function findDeadline($date)
+  {
+    return self::where("due_date","=",$date)->get();
+  }
 }

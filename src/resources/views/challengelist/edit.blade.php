@@ -22,7 +22,7 @@
             @endif
 
             <form
-                action="{{ route('challengelist.edit', ['id' => $challengelist->folder_id, 'challengelist_id' => $challengelist->id]) }}"
+                action="{{ route('challengelist.edit', ['folder' => $challengelist->folder_id, 'challengelist' => $challengelist->id]) }}"
                 method="POST">
               @csrf
               <div class="form-group">
@@ -30,7 +30,7 @@
                 <!-- 編集ページを開いた時は、タスクを作成時のタイトルを入力欄へ表示。値を変更して送信したが入力エラーで戻った時は、変更後の値を入力欄へ表示。 -->
                 <!-- value属性 - 直前の入力値をデフォルト値に設定,第二引数がデフォルト値 -->
                 <input type="text" class="form-control" name="title" id="title"
-                       value="{{ old('title') ?? $challengelist->title }}" />
+                       value="{{ old('title', $challengelist->title) }}" />
               </div>
               <div class="form-group">
                 <label for="status">実行ステータス</label>
@@ -50,7 +50,7 @@
                 <label for="due_date">期限</label>
                  <!-- value属性では、「ループしたキー」と「直前の入力値またはデータベースに登録済の値」を比べて、一致する場合は値を出力 -->
                 <input type="text" class="form-control" name="due_date" id="due_date"
-                       value="{{ old('due_date') ?? $challengelist->formatted_due_date }}" />
+                value="{{ old('due_date', $challengelist->formatted_due_date) }}" />
               </div>
               <div class="text-right">
                 <button type="submit" class="btn btn-primary">登録</button>

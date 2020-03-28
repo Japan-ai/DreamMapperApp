@@ -15,11 +15,11 @@
           </div>
           <div class="list-group">
 
-            @foreach($folders as $folder)
-              <!-- heaf部分は、route関数でルーティングの設定からURLを作成, 第一引数はルート名でweb.phpのchallengelist.index、第二引数はルートURLのうち変数になっている部分{id}に値を入力 -->
+          @foreach($folders as $folder)
+              <!-- heaf部分は、route関数でルーティングの設定からURLを作成, 第一引数はルート名でweb.phpのchallengelist.index、第二引数はルートURLのうち変数になっている部分{folder}に値を入力 -->
               <!-- class部分は、ChallengeListControllerの$current_folder_id(=閲覧されているフォルダのID)とID値が合致する場合のみ 'active' というHTMLクラスを出力 -->
               <a
-                  href="{{ route('challengelist.index', ['id' => $folder->id]) }}"
+                  href="{{ route('challengelist.index', ['folder' => $folder->id]) }}"
                   class="list-group-item {{ $current_folder_id === $folder->id ? 'active' : '' }}"
               >
                 <!-- 変数の値の展開で、タイトルを表示 -->
@@ -35,8 +35,8 @@
           <div class="panel-heading">新規チャレンジ項目</div>
           <div class="panel-body">
             <div class="text-right">
-            <!-- href部分は、route関数でルーティングの設定からURLを作成, 第一引数はルート名でweb.phpのchallengelist.create、第二引数はルートURLのうち変数になっている部分{id}に値を入力 -->
-            <a href="{{ route('challengelist.create', ['id' => $current_folder_id]) }}" class="btn btn-default btn-block">
+            <!-- href部分は、route関数でルーティングの設定からURLを作成, 第一引数はルート名でweb.phpのchallengelist.create、第二引数はルートURLのうち変数になっている部分{folder}に値を入力 -->
+            <a href="{{ route('challengelist.create', ['folder' => $current_folder_id]) }}" class="btn btn-default btn-block">
                 新規チャレンジ項目の追加
               </a>
             </div>
@@ -60,8 +60,8 @@
                 </td>
                 <!-- ChallengeList.phpに記述された値が表示方法で、期日を表示 -->
                 <td>{{ $challengelist->formatted_due_date }}</td>
-                <!-- href部分は、route関数でルーティングの設定からURLを作成, 第一引数はルート名でweb.phpのchallengelist.edit、第二引数はルートURLのうち変数になっている部分{id}に値を入力 -->
-                <td><a href="{{ route('challengelist.edit', ['id' => $challengelist->folder_id, 'challengelist_id' => $challengelist->id]) }}">編集</a></td>
+                <!-- href部分は、route関数でルーティングの設定からURLを作成, 第一引数はルート名でweb.phpのchallengelist.edit、第二引数はルートURLのうち変数になっている部分{folder}に値を入力 -->
+                <td><a href="{{ route('challengelist.edit', ['folder' => $challengelist->folder_id, 'challengelist' => $challengelist->id]) }}">編集</a></td>
               </tr>
             @endforeach
             </tbody>

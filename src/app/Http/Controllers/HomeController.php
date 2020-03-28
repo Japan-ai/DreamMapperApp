@@ -3,24 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;//追加
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function index()
     {
         // ログインしたユーザーを取得
@@ -36,7 +22,7 @@ class HomeController extends Controller
 
         // フォルダがあれば、そのフォルダのチャレンジリスト一覧にリダイレクト
         return redirect()->route('challengelist.index', [
-            'id' => $folder->id,
+            'folder' => $folder->id,
         ]);
     }
 }
