@@ -25,12 +25,12 @@ body {
 
 .my-navbar-brand,
 .my-navbar-item {
-  color: rgb(250, 176, 17);
+  color:  #ffffff;
 }
 
 .my-navbar-brand:hover,
 a.my-navbar-item:hover {
-  color: #ffffff;
+  color:#f9f54e;
 }
 
 .table td:nth-child(2),
