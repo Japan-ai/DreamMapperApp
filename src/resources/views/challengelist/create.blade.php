@@ -13,7 +13,7 @@
           <div class="panel-heading">新規チャレンジ項目の追加</div>
           <!-- 下記 フォルダの新規作成時の入力エラーメッセージの表示 -->
           <div class="panel-body">
-            <!-- @if($errors->any())で入力内容にエラーがあるか確認 -->
+            <!-- 入力内容にエラーがあるか確認 -->
 
             @if($errors->any())
               <div class="alert alert-danger">
@@ -23,7 +23,6 @@
                 @endforeach
               </div>
             @endif
-
             <!-- 上記 フォルダの新規作成時の入力エラーメッセージの表示 -->
             <form action="{{ route('challengelist.create', ['folder' => $folder_id]) }}" method="POST">
               @csrf

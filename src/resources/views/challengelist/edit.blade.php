@@ -34,7 +34,7 @@
               </div>
               <div class="form-group">
                 <label for="status">実行ステータス</label>
-                <!-- 実行ステータス入力欄はセレクトボックス, ChallengeListモデルで定義した配列定数STATUSを@foreachでループしてoption要素を出力 -->
+
                 <select name="status" id="status" class="form-control">
                   @foreach(\App\ChallengeList::STATUS as $key => $val)
                     <!-- $key == old('status'では、「ループしたキー」と「直前の入力値またはデータベースに登録済の値」を比べて、一致する場合はoption要素のvalueに配列のキー（1, 2, 3）を出力、表示文字列には'label'の値を出力 -->
