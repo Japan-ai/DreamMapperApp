@@ -37,7 +37,7 @@
 
                 <select name="status" id="status" class="form-control">
                   @foreach(\App\ChallengeList::STATUS as $key => $val)
-                    <!-- $key == old('status'では、「ループしたキー」と「直前の入力値またはデータベースに登録済の値」を比べて、一致する場合はoption要素のvalueに配列のキー（1, 2, 3）を出力、表示文字列には'label'の値を出力 -->
+                    <!-- 「ループしたキー」と「直前の入力値またはデータベースに登録済の値」を比べて、一致する場合はoption要素のvalueに配列のキー（1, 2, 3）を出力、表示文字列にはlabelの値を出力 -->
                     <option
                         value="{{ $key }}"
                         {{ $key == old('status', $challengelist->status) ? 'selected' : '' }}>
