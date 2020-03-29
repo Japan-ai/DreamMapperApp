@@ -12,9 +12,9 @@
         <nav class="panel panel-default">
           <div class="panel-heading">新規チャレンジ項目の追加</div>
           <!-- 下記 フォルダの新規作成時の入力エラーメッセージの表示 -->
-          <div class="panel-body">
+          <div clasÏs="panel-body">
             <!-- 入力内容にエラーがあるか確認 -->
-
+Ï
             @if($errors->any())
               <div class="alert alert-danger">
                 <!-- エラーがある場合は、エラーメッセージを列挙 -->

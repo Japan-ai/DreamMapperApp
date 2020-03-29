@@ -47,6 +47,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Folder');
     }
 
+    public function challengelist()
+    {
+        return $this->hasMany('App\ChallengeList');
+    }
+
     /**
      * パスワード再設定メールを送信
      */
@@ -54,5 +59,4 @@ class User extends Authenticatable
     {
         Mail::to($this)->send(new ResetPassword($token));
     }
-
 }

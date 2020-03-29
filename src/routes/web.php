@@ -9,6 +9,8 @@ Route::group(['middleware' => 'auth'], function() {
   Route::get('/folders/create', 'FolderController@showCreateForm')->name('folders.create');
   //分類フォルダ新規作成処理の実行
   Route::post('/folders/create', 'FolderController@create');
+  //期限当日のチャレンジリスト項目を一覧表示
+  Route::get('/challengelist/deadline', 'ChallengeListController@deadline')->name('challengelist.deadline');
 
 
 //ポリシーが、ユーザーの持つ権限にしたがって特定の処理を許可するか判断するためにミドルウェアを適用

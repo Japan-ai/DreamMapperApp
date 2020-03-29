@@ -2,7 +2,7 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/bootflat/2.0.4/css/bootflat.min.css');
 
 body {
-  background-color: #f4f7f8;
+  background-color: #2398ff;
 }
 
 .navbar {
@@ -30,7 +30,7 @@ body {
 
 .my-navbar-brand:hover,
 a.my-navbar-item:hover {
-  color:#fdd831;
+  color:#434a54;
 }
 
 .table td:nth-child(2),
@@ -43,4 +43,12 @@ a.my-navbar-item:hover {
 .form-control[disabled],
 .form-control[readonly] {
   background-color: #fff;
+}
+
+button{
+  color: #2398ff;
+}
+
+a{
+  color: #2398ff;
 }

@@ -35,9 +35,17 @@ class ChallengeList extends Model
       $status = $this->status;
 
       //実行ステータスラベルの色を返す
-      return self::STATUS[$status]['class'];
+      return self::STATUS[$status]['label'];
   }
     
+  public function getStatusClassAttribute()
+  {
+      // 実行ステータスの値
+      $status = $this->status;
+
+      //実行ステータスラベルの色を返す
+      return self::STATUS[$status]['class'];
+  }
   
     //アクセサの追加
     /**
@@ -50,9 +58,4 @@ class ChallengeList extends Model
       return Carbon::createFromFormat('Y-m-d', $this->due_date)
             ->format('Y/m/d');
     }
-
-  public function findDeadline($date)
-  {
-    return self::where("due_date","=",$date)->get();
-  }
 }

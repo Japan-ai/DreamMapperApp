@@ -22,10 +22,10 @@ class ChallengeListController extends Controller
       // Authモデルのuserクラスメソッドで、ログインしたユーザーが持つすべてのフォルダデータをデータベースから取得
       $folders = Auth::user()->folders()->get();
       // 選択されたフォルダに紐付くチャレンジリストを取得する
-      //ルーティング定義のURLの中括弧で囲まれたキーワード{folder}とコントローラーメソッドの仮引数名$folderが一致、かつ引数が型指定Folderされているので、自動的に引数の型のモデルクラスインスタンスを作成。ルートとモデルを結びつけるバインディングで、URLエラー時はレスポンスステータスコードを表示
+      //ルーティング定義のURLの中括弧で囲まれたキーワード{folder}とコントローラーメソッドの仮引数名$folderが一致、かつ引数が型指定Folderされているので、自動的に引数の型のモデルクラスインスタンスを作成。
       $challengelist = $folder->challengelist()->get();
 
-      //選択されたフォルダのみ背景画面を変えるための処理, URLの変数部分'/folders/{id}/challendelist'の{id}の値をControllerで受け取ってindex.blade.phpに渡す。{id}の値に合致する場合だけHTMLクラスを出力。
+      //選択されたフォルダのみ背景画面を変えるための処理, URLの変数部分'/folders/{folder}/challendelist'の{folder}の値をControllerで受け取ってindex.blade.phpに渡す。{folder}の値に合致する場合だけHTMLクラスを出力。
       //第一引数は、値の渡し先である'challengelistディレクトリ直下のindex.blade.php'を示す
       //第二引数は、テンプレート(=index.blade.php)に渡すデータ(キーがテンプレート側で参照する際の変数名)
       return view('challengelist/index', 
@@ -43,7 +43,7 @@ class ChallengeListController extends Controller
   public function showCreateForm(Folder $folder)
   {
       //ルーティング定義のURLの中括弧で囲まれたキーワード{folder}とコントローラーメソッドの仮引数名$folderが一致、かつ引数が型指定Folderされているので、自動的に引数の型のモデルクラスインスタンスを作成。ルートとモデルを結びつけるバインディングで、URLエラー時はレスポンスステータスコードを表示
-      //チャレンジリスト作成ページのURL'/folders/{id}/challendelist/create'の{id}の値をControllerで受け取ってchallengelistフォルダ直下のcreate.blade.phpに渡す。
+      //チャレンジリスト作成ページのURL'/folders/{folder}/challendelist/create'の{folder}の値をControllerで受け取ってchallengelistフォルダ直下のcreate.blade.phpに渡す。
       return view('challengelist/create', [
         'folder_id' => $folder->id,
       ]);
@@ -63,6 +63,7 @@ class ChallengeListController extends Controller
     $challengelist->title = $request->title;
     // 入力された値を期限へ代入
     $challengelist->due_date = $request->due_date;
+    $challengelist->user_id = Auth::user()->id;
     //選択されたフォルダに紐づくチャレンジリストを保存・書き込み
     $folder->challengelist()->save($challengelist);
     //ルーティング定義のURLの中括弧で囲まれたキーワード{folder}とコントローラーメソッドの仮引数名$folderが一致、かつ引数が型指定Folderされているので、自動的に引数の型のモデルクラスインスタンスを作成。ルートとモデルを結びつけるバインディングで、URLエラー時はレスポンスステータスコードを表示
@@ -88,6 +89,28 @@ class ChallengeListController extends Controller
         'challengelist' => $challengelist,
     ]);
 }
+
+
+  //本日期限のチャレンジリスト一覧表示に関するメソッド
+  /**
+  * @param Challengelist $challengelist
+  * @param 
+  * @return \Illuminate\View\View
+  */
+  public function deadline()
+  { 
+
+    // Authモデルのuserクラスメソッドで、ログインしたユーザーが持つすべてのチャレンジリストデータをデータベースから取得
+    $challengelist = Auth::user()->challengelist()->get();
+    $date = Carbon::today();
+    // 選択されたチャレンジリストに紐付く期限が本日のチャレンジリストを取得する
+    $filtered = $challengelist->where("due_date","=",$date );
+
+      return view('challengelist/deadline',[
+        'challengelist' => $challengelist,
+        'date' => $date
+      ]);
+  }
 
   //チャレンジリストの編集処理に関するメソッド
   //リクエストされたIDでchallengelistデータを取得＝編集対象を取得
