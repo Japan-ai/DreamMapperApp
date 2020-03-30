@@ -20,13 +20,13 @@ class ChallengeListController extends Controller
   */
   public function index(Folder $folder)
   {
-      // Authモデルのuserクラスメソッドで、ログインしたユーザーが持つすべてのフォルダデータをデータベースから取得
+      // Authモデルのuserクラスメソッドで、ログインしたユーザーが持つすべてのジャンルデータをデータベースから取得
       $folders = Auth::user()->folders()->get();
-      // 選択されたフォルダに紐付くチャレンジリストを取得する
+      // 選択されたジャンルに紐付くチャレンジリストを取得する
       //ルーティング定義のURLの中括弧で囲まれたキーワード{folder}とコントローラーメソッドの仮引数名$folderが一致、かつ引数が型指定Folderされているので、自動的に引数の型のモデルクラスインスタンスを作成。
       $challengelist = $folder->challengelist()->get();
 
-      //選択されたフォルダのみ背景画面を変えるための処理, URLの変数部分'/folders/{folder}/challendelist'の{folder}の値をControllerで受け取ってindex.blade.phpに渡す。{folder}の値に合致する場合だけHTMLクラスを出力。
+      //選択されたジャンルのみ背景画面を変えるための処理, URLの変数部分'/folders/{folder}/challendelist'の{folder}の値をControllerで受け取ってindex.blade.phpに渡す。{folder}の値に合致する場合だけHTMLクラスを出力。
       //第一引数は、値の渡し先である'challengelistディレクトリ直下のindex.blade.php'を示す
       //第二引数は、テンプレート(=index.blade.php)に渡すデータ(キーがテンプレート側で参照する際の変数名)
       return view('challengelist/index', 
@@ -44,7 +44,7 @@ class ChallengeListController extends Controller
   public function showCreateForm(Folder $folder)
   {
       //ルーティング定義のURLの中括弧で囲まれたキーワード{folder}とコントローラーメソッドの仮引数名$folderが一致、かつ引数が型指定Folderされているので、自動的に引数の型のモデルクラスインスタンスを作成。ルートとモデルを結びつけるバインディングで、URLエラー時はレスポンスステータスコードを表示
-      //チャレンジリスト作成ページのURL'/folders/{folder}/challendelist/create'の{folder}の値をControllerで受け取ってchallengelistフォルダ直下のcreate.blade.phpに渡す。
+      //チャレンジリスト作成ページのURL'/folders/{folder}/challendelist/create'の{folder}の値をControllerで受け取ってchallengelistジャンル直下のcreate.blade.phpに渡す。
       return view('challengelist/create', [
         'folder_id' => $folder->id,
       ]);
@@ -65,10 +65,10 @@ class ChallengeListController extends Controller
     // 入力された値を期限へ代入
     $challengelist->due_date = $request->due_date;
     $challengelist->user_id = Auth::user()->id;
-    //選択されたフォルダに紐づくチャレンジリストを保存・書き込み
+    //選択されたジャンルに紐づくチャレンジリストを保存・書き込み
     $folder->challengelist()->save($challengelist);
     //ルーティング定義のURLの中括弧で囲まれたキーワード{folder}とコントローラーメソッドの仮引数名$folderが一致、かつ引数が型指定Folderされているので、自動的に引数の型のモデルクラスインスタンスを作成。ルートとモデルを結びつけるバインディングで、URLエラー時はレスポンスステータスコードを表示
-    //challengelistフォルダ直下のindex.blade.phpに、第二引数のデータを渡す, redirectメソッドを使用して、チャレンジリストの新規作成が終わったら、そのフォルダに対応するチャレンジリスト一覧画面に移動
+    //challengelistジャンル直下のindex.blade.phpに、第二引数のデータを渡す, redirectメソッドを使用して、チャレンジリストの新規作成が終わったら、そのジャンルに対応するチャレンジリスト一覧画面に移動
     return redirect()->route('challengelist.index', [
         'folder' => $folder->id,
     ]);
@@ -82,7 +82,7 @@ class ChallengeListController extends Controller
    */
   public function showEditForm(Folder $folder, Challengelist $challengelist)
   {
-    //他者がチャレンジリストIDを編集できない設定にするため、フォルダとチャレンジリストの紐づきを確認
+    //他者がチャレンジリストIDを編集できない設定にするため、ジャンルとチャレンジリストの紐づきを確認
     $this->checkRelation($folder, $challengelist);
     //ルーティング定義のURLの中括弧で囲まれたキーワード{folder}とコントローラーメソッドの仮引数名$folderが一致、かつ引数が型指定Folderされているので、自動的に引数の型のモデルクラスインスタンスを作成。ルートとモデルを結びつけるバインディングで、URLエラー時はレスポンスステータスコードを表示
     //challengelistディレクトリの直下のedit.blade.phpへ第二引数の処理を返す
@@ -93,14 +93,8 @@ class ChallengeListController extends Controller
 
 
   //本日期限のチャレンジリスト一覧表示に関するメソッド
-  /**
-  * @param Challengelist $challengelist
-  * @param 
-  * @return \Illuminate\View\View
-  */
   public function deadline()
   { 
-
     // Authモデルのuserクラスメソッドで、ログインしたユーザーが持つすべてのチャレンジリストデータをデータベースから取得
     $challengelist = Auth::user()->challengelist()->get();
     $date = Carbon::today();
@@ -125,7 +119,7 @@ class ChallengeListController extends Controller
   public function edit(Folder $folder, Challengelist $challengelist, EditChallengelist $request)
 {
     
-    //他者がチャレンジリストIDを編集できない設定にするため、フォルダとチャレンジリストの紐づきを確認
+    //他者がチャレンジリストIDを編集できない設定にするため、ジャンルとチャレンジリストの紐づきを確認
     $this->checkRelation($folder, $challengelist);
 
     // 編集対象のchallengelistデータに入力値を代入して保存
@@ -140,7 +134,7 @@ class ChallengeListController extends Controller
     ]);
   }
 
-  // フォルダとタスクの関連性があるか調べ、リレーションが存在しない場合の404エラー表示のための実装
+  // ジャンルとタスクの関連性があるか調べ、リレーションが存在しない場合の404エラー表示のための実装
   /**
   * @param Folder $folder
   * @param Challengelist $challengelist

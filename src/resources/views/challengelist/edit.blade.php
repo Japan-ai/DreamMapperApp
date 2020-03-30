@@ -20,7 +20,6 @@
                 @endforeach
               </div>
             @endif
-
             <form
                 action="{{ route('challengelist.edit', ['folder' => $challengelist->folder_id, 'challengelist' => $challengelist->id]) }}"
                 method="POST">
@@ -33,7 +32,7 @@
                        value="{{ old('title', $challengelist->title) }}" />
               </div>
               <div class="form-group">
-                <label for="status">実行ステータス</label>
+                <label for="status">状況</label>
 
                 <select name="status" id="status" class="form-control">
                   @foreach(\App\ChallengeList::STATUS as $key => $val)
@@ -47,7 +46,7 @@
                 </select>
               </div>
               <div class="form-group">
-                <label for="due_date">期限</label>
+                <label for="due_date">期日</label>
                  <!-- value属性では、「ループしたキー」と「直前の入力値またはデータベースに登録済の値」を比べて、一致する場合は値を出力 -->
                 <input type="text" class="form-control" name="due_date" id="due_date"
                 value="{{ old('due_date', $challengelist->formatted_due_date) }}" />

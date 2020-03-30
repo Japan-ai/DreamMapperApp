@@ -5,9 +5,9 @@ Route::group(['middleware' => 'auth'], function() {
 
   //ホーム画面の表示
   Route::get('/home', 'HomeController@index')->name('home');
-  //分類フォルダ新規作成ページの表示
+  //ジャンル新規作成ページの表示
   Route::get('/folders/create', 'FolderController@showCreateForm')->name('folders.create');
-  //分類フォルダ新規作成処理の実行
+  //ジャンル新規作成処理の実行
   Route::post('/folders/create', 'FolderController@create');
   //期限当日のチャレンジリスト項目を一覧表示
   Route::get('/challengelist/deadline', 'ChallengeListController@deadline')->name('challengelist.deadline');
@@ -17,7 +17,7 @@ Route::group(['middleware' => 'auth'], function() {
 //canミドルウェアの引数（view,folder）は、カンマの左側が認可処理の種類、右側がポリシーに渡すルートパラメーター（URLの変数部分）
 Route::group(['middleware' => 'can:view,folder'], function() {
 
-  //分類フォルダとチャレンジリストの同時画面表示
+  //ジャンルとチャレンジリストの同時画面表示
   Route::get('/folders/{folder}/challengelist', 'ChallengeListController@index')->name('challengelist.index');
 
   //チャレンジリスト新規作成ページの表示

@@ -19,7 +19,7 @@ class ChallengelistTest extends TestCase
     {
         parent::setUp();
 
-        // テストケース実行前にフォルダデータを作成
+        // テストケース実行前にジャンルデータを作成
         $this->seed('FoldersTableSeeder');
     }
 

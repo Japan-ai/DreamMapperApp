@@ -2,7 +2,7 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/bootflat/2.0.4/css/bootflat.min.css');
 
 body {
-  background-color: #2398ff;
+  background-color: #2c9bfc;
 }
 
 .navbar {
@@ -25,12 +25,12 @@ body {
 
 .my-navbar-brand,
 .my-navbar-item {
-  color:  #ffffff;
+  color:#ffffff;
 }
 
 .my-navbar-brand:hover,
 a.my-navbar-item:hover {
-  color:#aab2bd;
+  color: #2c9bfc;
 }
 
 .table td:nth-child(2),
@@ -45,10 +45,13 @@ a.my-navbar-item:hover {
   background-color: #fff;
 }
 
-button{
-  color: rgb(250, 176, 17);
+button.btn.btn-primary a{
+  color: #fff;
+}
+.btn.btn-default.btn-block{
+  margin-top: 9px;
 }
 
-a{
-  color: #2398ff;
+div.text-center a{
+  color: #fff;
 }

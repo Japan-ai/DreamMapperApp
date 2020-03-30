@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\DB;
 
 class ChallengeListTableSeeder extends Seeder
 {
-    //フォルダID１に、３つのチャレンジリストを入力 
+    //ジャンルID１に、３つのチャレンジリストを入力 
     /**
      * Run the database seeds.
      *

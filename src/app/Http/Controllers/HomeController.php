@@ -12,15 +12,15 @@ class HomeController extends Controller
         // ログインしたユーザーを取得
         $user = Auth::user();
 
-        // ログインしたユーザーに紐づくフォルダを一つ取得する
+        // ログインしたユーザーに紐づくジャンルを一つ取得する
         $folder = $user->folders()->first();
 
-        // フォルダが未作成であれば、ホームページへ
+        // ジャンルが未作成であれば、ホームページへ
         if (is_null($folder)) {
             return view('home');
         }
 
-        // フォルダがあれば、そのフォルダのチャレンジリスト一覧にリダイレクト
+        // ジャンルがあれば、そのジャンルのチャレンジリスト一覧にリダイレクト
         return redirect()->route('challengelist.index', [
             'folder' => $folder->id,
         ]);

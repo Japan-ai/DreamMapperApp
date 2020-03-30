@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-//「フォルダ新規作成時に入力された値」のバリデーションテストに関するルール定義をおこなうファイル
+//「ジャンル新規作成時に入力された値」のバリデーションテストに関するルール定義をおこなうファイル
 class CreateFolder extends FormRequest
 {
     /**
@@ -15,7 +15,7 @@ class CreateFolder extends FormRequest
         return true;//追加,リクエストを受け付ける
     }
 
-    // フォルダ新規作成時の入力された値のバリデーション
+    // ジャンル新規作成時の入力された値のバリデーション
     /**
      * @return array
      */
@@ -23,7 +23,7 @@ class CreateFolder extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|max:20',//フォルダ名の文字数入力上限は20文字
+            'title' => 'required|max:20',//ジャンルの文字数入力上限は20文字
         ];
     }
 
@@ -31,7 +31,7 @@ class CreateFolder extends FormRequest
     public function attributes()
     {
       return [
-        'title' => 'フォルダ名',//タイトルの入力必須を設定
+        'title' => 'ジャンル',//タイトルの入力必須を設定
       ];
     }
 }

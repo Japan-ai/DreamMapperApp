@@ -10,7 +10,7 @@ class FolderPolicy
 {
    use HandlesAuthorization; 
 
-    //フォルダの閲覧権限
+    //ジャンルの閲覧権限
     /**
      * @param Usewebr $user
      * @param Folder $folder
@@ -18,7 +18,7 @@ class FolderPolicy
      */
     public function view(User $user, Folder $folder)
     {
-        //ユーザーとフォルダが紐づいているときのみ許可
+        //ユーザーとジャンルが紐づいているときのみ許可
         return $user->id === $folder->user_id;
     }
 }
