@@ -240,7 +240,7 @@ label {
 }
 
 button {
-  background-color: #2398ff;
+  background-color: rgb(250, 176, 17);
   border-radius: 0;
 }
 
@@ -2659,7 +2659,7 @@ textarea.form-control.is-invalid {
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
-  background-color: transparent;
+  background-color: rgb(250, 176, 17);
   border: 1px solid transparent;
   padding: 0.375rem 0.75rem;
   font-size: 0.9rem;
@@ -2688,11 +2688,13 @@ textarea.form-control.is-invalid {
 .btn.disabled,
 .btn:disabled {
   opacity: 0.65;
+  background-color: #2398ff;
 }
 
 a.btn.disabled,
 fieldset:disabled a.btn {
   pointer-events: none;
+  background-color: #2398ff;
 }
 
 .btn-primary {
@@ -5534,7 +5536,7 @@ a.badge-dark.focus {
 
 .alert-primary {
   color: #2398ff;
-  background-color: #d6e9f8;
+  background-color: #2398ff;
   border-color: #c6e0f5;
 }
 
@@ -5771,8 +5773,8 @@ a.badge-dark.focus {
 .list-group-item.active {
   z-index: 2;
   color: #fff;
-  background-color: #2398ff;
-  border-color: #2398ff;
+  background-color: rgb(250, 176, 17);
+  border-color: rgb(250, 176, 17);
 }
 
 .list-group-item + .list-group-item {
@@ -5954,7 +5956,7 @@ a.badge-dark.focus {
 .list-group-item-primary.list-group-item-action:hover,
 .list-group-item-primary.list-group-item-action:focus {
   color: #2398ff;
-  background-color: #b0d4f1;
+  background-color: #2398ff;
 }
 
 .list-group-item-primary.list-group-item-action.active {

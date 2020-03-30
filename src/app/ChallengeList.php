@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Carbon\Carbon;//追加,Carbonライブラリの読み込み
+use Carbon\Carbon;
 
 class ChallengeList extends Model
 {

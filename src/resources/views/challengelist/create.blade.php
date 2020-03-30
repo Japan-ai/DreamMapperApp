@@ -14,7 +14,6 @@
           <!-- 下記 フォルダの新規作成時の入力エラーメッセージの表示 -->
           <div clasÏs="panel-body">
             <!-- 入力内容にエラーがあるか確認 -->
-Ï
             @if($errors->any())
               <div class="alert alert-danger">
                 <!-- エラーがある場合は、エラーメッセージを列挙 -->
@@ -36,7 +35,7 @@
                 <input type="text" class="form-control" name="due_date" id="due_date" value="{{ old('due_date') }}" />
               </div>
               <div class="text-right">
-                <button type="submit" class="btn btn-primary">登録</button>
+                <button type="submit" class="btn">登録</button>
               </div>
             </form>
           </div>

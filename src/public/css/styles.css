@@ -30,7 +30,7 @@ body {
 
 .my-navbar-brand:hover,
 a.my-navbar-item:hover {
-  color:#434a54;
+  color:#aab2bd;
 }
 
 .table td:nth-child(2),
@@ -46,7 +46,7 @@ a.my-navbar-item:hover {
 }
 
 button{
-  color: #2398ff;
+  color: rgb(250, 176, 17);
 }
 
 a{

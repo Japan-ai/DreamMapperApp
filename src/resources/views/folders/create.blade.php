@@ -25,11 +25,11 @@
                 <input type="text" class="form-control" name="title" id="title" value="{{ old('title') }}" />
               </div>
               <div class="text-right">
-                <button type="submit" class="btn btn-primary">登録</button>
+                <button type="submit" class="btn">登録</button>
               </div>
             </form>
           </div>
-        </nav>
+        </nav>Ï
       </div>
     </div>
   </div>
