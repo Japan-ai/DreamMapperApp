@@ -99,10 +99,10 @@ class ChallengeListController extends Controller
     $challengelist = Auth::user()->challengelist()->get();
     $date = Carbon::today();
     // 選択されたチャレンジリストに紐付く期限が本日のチャレンジリストを取得
-    $filtered = $challengelist->where("due_date","=",$date );
+    $filtered = $challengelist->where("due_date","=",$date->toDateString() );
 
       return view('challengelist/deadline',[
-        'challengelist' => $challengelist,
+        'challengelist' => $filtered,
         'date' => $date
       ]);
   }
