@@ -8,7 +8,7 @@
           <div class="panel-heading">リマインダー</div>
           <div class="panel-body">
               <div class="form-group">
-                <p>本日のチャレンジ項目</p>
+                <p>【本日のチャレンジ項目】</p>
                   <ul>
                   @foreach($challengelist->all() as $challenge)
                     <li>{{ $challenge->title }}

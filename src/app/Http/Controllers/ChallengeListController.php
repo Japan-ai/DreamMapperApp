@@ -98,7 +98,7 @@ class ChallengeListController extends Controller
     // Authモデルのuserクラスメソッドで、ログインしたユーザーが持つすべてのチャレンジリストデータをデータベースから取得
     $challengelist = Auth::user()->challengelist()->get();
     $date = Carbon::today();
-    // 選択されたチャレンジリストに紐付く期限が本日のチャレンジリストを取得する
+    // 選択されたチャレンジリストに紐付く期限が本日のチャレンジリストを取得
     $filtered = $challengelist->where("due_date","=",$date );
 
       return view('challengelist/deadline',[
