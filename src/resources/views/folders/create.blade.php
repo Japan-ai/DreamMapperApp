@@ -6,7 +6,7 @@
       <div class="col col-md-offset-3 col-md-6">
         <nav class="panel panel-default">
           <div class="panel-heading">ジャンルの追加</div>
-          <div class="panel-body">
+          <div class="panel-body">modify
             <!-- エラーメッセージの表示 -->
             @if($errors->any())
               <div class="alert alert-danger">

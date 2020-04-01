@@ -100,7 +100,7 @@ class ChallengeListController extends Controller
     $date = Carbon::today();
     // 選択されたチャレンジリストに紐付く期限が本日のチャレンジリストを取得
     $filtered = $challengelist->where("due_date","=",$date->toDateString() );
-
+  
       return view('challengelist/deadline',[
         'challengelist' => $filtered,
         'date' => $date
