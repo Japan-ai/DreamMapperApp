@@ -49,6 +49,7 @@
               <th>状況</th>
               <th>期日</th>
               <th></th>
+              <th></th>
             </tr>
             </thead>
             <tbody>
@@ -63,6 +64,7 @@
                 <td>{{ $challengelist->formatted_due_date }}</td>
                 <!-- href部分は、route関数でルーティングの設定からURLを作成, 第一引数はルート名でweb.phpのchallengelist.edit、第二引数はルートURLのうち変数になっている部分{folder}に値を入力 -->
                 <td><a href="{{ route('challengelist.edit', ['folder' => $challengelist->folder_id, 'challengelist' => $challengelist->id]) }}">編集</a></td>
+                <td><a href="{{ route('challengelist.delete', ['folder' => $challengelist->folder_id, 'challengelist' => $challengelist->id]) }}">削除</a></td>
               </tr>
             @endforeach
             </tbody>
