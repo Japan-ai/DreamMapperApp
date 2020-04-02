@@ -91,9 +91,65 @@ class ChallengeListController extends Controller
     ]);
 }
 
+  //チャレンジリストの編集処理に関するメソッド
+  //リクエストされたIDでchallengelistデータを取得＝編集対象を取得
+  //ルーティング定義のURLの中括弧で囲まれたキーワード{folder}とコントローラーメソッドの仮引数名$folderが一致、かつ引数が型指定Folderされているので、自動的に引数の型のモデルクラスインスタンスを作成。ルートとモデルを結びつけるバインディングで、URLエラー時はレスポンスステータスコードを表示
+     /**
+     * @param Folder $folder
+     * @param Challengelist $challengelist
+     * @param EditChallengelist $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function edit(Folder $folder, Challengelist $challengelist, EditChallengelist $request)
+    {
+        
+        //他者がチャレンジリストIDを編集できない設定にするため、ジャンルとチャレンジリストの紐づきを確認
+        $this->checkRelation($folder, $challengelist);
+    
+        // 編集対象のchallengelistデータに入力値を代入して保存
+        $challengelist->title = $request->title;
+        $challengelist->status = $request->status;
+        $challengelist->due_date = $request->due_date;
+        $challengelist->save();
+    
+        // 編集後は、編集対象のchallengelistが属するリスト一覧画面へリダイレクト
+        return redirect()->route('challengelist.index', [
+            'folder' => $challengelist->folder_id,
+        ]);
+      }
 
-  //本日期限のチャレンジリスト一覧表示に関するメソッド
-  public function deadline()
+  //チャレンジリストの削除画面表示に関するメソッド
+  /**
+   * @param Folder $folder
+   * @param Challengelist $challengelist
+   * @return \Illuminate\View\View
+   */
+  public function showDeleteForm(Folder $folder, Challengelist $challengelist)
+  {
+    //他者がチャレンジリストIDを削除できない設定にするため、ジャンルとチャレンジリストの紐づきを確認
+    $this->checkRelation($folder, $challengelist);
+    //ルーティング定義のURLの中括弧で囲まれたキーワード{folder}とコントローラーメソッドの仮引数名$folderが一致、かつ引数が型指定Folderされているので、自動的に引数の型のモデルクラスインスタンスを作成。ルートとモデルを結びつけるバインディングで、URLエラー時はレスポンスステータスコードを表示
+    //challengelistディレクトリの直下のdelete.blade.phpへ第二引数の処理を返す
+    return view('challengelist/delete', [
+        'challengelist' => $challengelist,
+    ]);
+}
+
+ //チャレンジリストの削除画面表示に関するメソッド
+public function delete(Folder $folder, Challengelist $challengelist)
+{
+//他者がチャレンジリストIDを編集できない設定にするため、ジャンルとチャレンジリストの紐づきを確認
+$this->checkRelation($folder, $challengelist);
+
+$challengelist = Challengelist::findOrFail($folder, $challengelist)->delete();
+
+// 削除後は、削除対象のchallengelistが属するリスト一覧画面へリダイレクト
+return redirect()->route('challengelist.index', [
+'folder' => $challengelist->folder_id,
+]);
+}
+      //本日期限のチャレンジリスト一覧表示に関するメソッド
+  public function deadline(Folder $folder, Challengelist $challengelist)
   { 
     // Authモデルのuserクラスメソッドで、ログインしたユーザーが持つすべてのチャレンジリストデータをデータベースから取得
     $challengelist = Auth::user()->challengelist()->get();
@@ -107,32 +163,6 @@ class ChallengeListController extends Controller
       ]);
   }
 
-  //チャレンジリストの編集処理に関するメソッド
-  //リクエストされたIDでchallengelistデータを取得＝編集対象を取得
-  //ルーティング定義のURLの中括弧で囲まれたキーワード{folder}とコントローラーメソッドの仮引数名$folderが一致、かつ引数が型指定Folderされているので、自動的に引数の型のモデルクラスインスタンスを作成。ルートとモデルを結びつけるバインディングで、URLエラー時はレスポンスステータスコードを表示
-     /**
-     * @param Folder $folder
-     * @param Challengelist $challengelist
-     * @param EditChallengelist $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-  public function edit(Folder $folder, Challengelist $challengelist, EditChallengelist $request)
-{
-    
-    //他者がチャレンジリストIDを編集できない設定にするため、ジャンルとチャレンジリストの紐づきを確認
-    $this->checkRelation($folder, $challengelist);
-
-    // 編集対象のchallengelistデータに入力値を代入して保存
-    $challengelist->title = $request->title;
-    $challengelist->status = $request->status;
-    $challengelist->due_date = $request->due_date;
-    $challengelist->save();
-
-    // 編集後は、編集対象のchallengelistが属するリスト一覧画面へリダイレクト
-    return redirect()->route('challengelist.index', [
-        'folder' => $challengelist->folder_id,
-    ]);
-  }
 
   // ジャンルとタスクの関連性があるか調べ、リレーションが存在しない場合の404エラー表示のための実装
   /**

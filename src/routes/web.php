@@ -29,6 +29,11 @@ Route::group(['middleware' => 'can:view,folder'], function() {
   Route::get('/folders/{folder}/challengelist/{challengelist}/edit', 'ChallengelistController@showEditForm')->name('challengelist.edit');
   //チャレンジリスト編集処理の実行
   Route::post('/folders/{folder}/challengelist/{challengelist}/edit', 'ChallengelistController@edit');
+  
+  //チャレンジリスト削除ページの表示
+  Route::get('/folders/{folder}/challengelist/{challengelist}/delete', 'ChallengelistController@showDeleteForm')->name('challengelist.delete');
+  //チャレンジリスト削除処理の実行
+  Route::post('/folders/{folder}/challengelist/{challengelist}/delete', 'ChallengelistController@delete');
   });
 });
 

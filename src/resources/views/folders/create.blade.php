@@ -13,7 +13,7 @@
                 @foreach($errors->all() as $message)
                   <p>{{ $message }}</p>
                 @endforeach
-              </div>
+              </div>$folder, $challengelist
             @endif
             <form action="{{ route('folders.create') }}" method="post">
               @csrf
