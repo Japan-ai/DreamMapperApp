@@ -9,13 +9,24 @@
           <div class="panel-body">
             <form action="{{ route('password.update') }}" method="POST">
               @csrf
-              <div class="form-group">
+              <input type="hidden" name="token" value="{{ $token }}">
+              <div class="form-g
                 <label for="email">メールアドレス</label>
-                <input type="text" class="form-control" id="email" name="email" />
+                <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" />
+                @error('email')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                @enderror
               </div>
               <div class="form-group">
                 <label for="password">新しいパスワード</label>
                 <input type="password" class="form-control" id="password" name="password" />
+                @error('password')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                @enderror
               </div>
               <div class="form-group">
                 <label for="password-confirm">新しいパスワード（確認）</label>
