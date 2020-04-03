@@ -135,18 +135,20 @@ class ChallengeListController extends Controller
     ]);
 }
 
- //チャレンジリストの削除画面表示に関するメソッド
-public function delete(Folder $folder, Challengelist $challengelist)
+ //チャレンジリストの削除処理に関するメソッド
+public function delete(Folder $folder, Challengelist $challengelist , Request $request)
 {
-//他者がチャレンジリストIDを編集できない設定にするため、ジャンルとチャレンジリストの紐づきを確認
-$this->checkRelation($folder, $challengelist);
-
-$challengelist = Challengelist::findOrFail($folder, $challengelist)->delete();
-
-// 削除後は、削除対象のchallengelistが属するリスト一覧画面へリダイレクト
-return redirect()->route('challengelist.index', [
-'folder' => $challengelist->folder_id,
-]);
+  //他者がチャレンジリストIDを編集できない設定にするため、ジャンルとチャレンジリストの紐づきを確認
+  $this->checkRelation($folder, $challengelist);
+  // 編集対象のchallengelistデータに入力値を代入して保存
+  $challengelist->title = $request->title;
+  $challengelist->status = $request->status;
+  $challengelist->due_date = $request->due_date;
+  $challengelist->delete();
+  // 削除後は、削除対象のchallengelistが属するリスト一覧画面へリダイレクト
+  return redirect()->route('challengelist.index', [
+  'folder' => $challengelist->folder_id,
+  ]);
 }
       //本日期限のチャレンジリスト一覧表示に関するメソッド
   public function deadline(Folder $folder, Challengelist $challengelist)
