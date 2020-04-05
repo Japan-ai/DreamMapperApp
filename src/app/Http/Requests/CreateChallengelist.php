@@ -4,12 +4,10 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-//「チャレンジリスト新規作成時に入力された値」のバリデーションをおこなうファイル
+//「チャレンジリスト新規作成時に入力された値」のバリデーションテストに関するルール定義をおこなうファイル
 class CreateChallengelist extends FormRequest
 {
     /**
-     * Determine if the user is authorized to make this request.
-     *
      * @return bool
      */
     public function authorize()
@@ -19,8 +17,6 @@ class CreateChallengelist extends FormRequest
 
     //ruleメソッドで、入力欄ごとに入力された値のバリデーションチェックするルールを定義
     /**
-     * Get the validation rules that apply to the request.
-     *
      * @return array
      */
     public function rules()
@@ -42,7 +38,7 @@ class CreateChallengelist extends FormRequest
         ];
     }
 
-    //エラーメッセージの設定, due_dateのafter_or_equalルールに違反した場合は、指定されたメッセージを出力,
+    //エラーメッセージの設定, due_dateのafter_or_equalルールに違反した場合は、指定されたメッセージを出力
     public function messages()
     {
         return [

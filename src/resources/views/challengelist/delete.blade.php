@@ -1,32 +1,19 @@
 @extends('layout')
 
-@section('styles')
-  <!-- 共通部分 styles.blade.phpを呼び出し-->
-  @include('share.flatpickr.styles')
-@endsection
-
 @section('content')
   <div class="container">
     <div class="row">
       <div class="col col-md-offset-3 col-md-6">
         <nav class="panel panel-default">
-          <div class="panel-heading">チャレンジリストの編集</div>
+          <div class="panel-heading">チャレンジリストを削除してよろしいですか？</div>
           <div class="panel-body">
-
-            @if($errors->any())
-              <div class="alert alert-danger">
-                @foreach ($errors->all() as $message)
-                  <p>{{ $message }}</p>
-                @endforeach
-              </div>
-            @endif
             <form
-                action="{{ route('challengelist.edit', ['folder' => $challengelist->folder_id, 'challengelist' => $challengelist->id]) }}"
+                action="{{ route('challengelist.delete', ['folder' => $challengelist->folder_id, 'challengelist' => $challengelist->id]) }}"
                 method="POST">
               @csrf
               <div class="form-group">
                 <label for="title">タイトル</label>
-                <!-- 編集ページを開いた時は、タスクを作成時のタイトルを入力欄へ表示。値を変更して送信したが入力エラーで戻った時は、変更後の値を入力欄へ表示。 -->
+                <!-- ページを開いた時は、タスクを作成時のタイトルを入力欄へ表示。 -->
                 <!-- value属性 - 直前の入力値をデフォルト値に設定,第二引数がデフォルト値 -->
                 <input type="text" class="form-control" name="title" id="title"
                        value="{{ old('title', $challengelist->title) }}" />
@@ -52,7 +39,8 @@
                 value="{{ old('due_date', $challengelist->formatted_due_date) }}" />
               </div>
               <div class="text-right">
-                <button type="submit" class="btn btn-primary">登録</button>
+                <button type="submit" class="btn btn-primary">削除</button>
+                <button type="button" onclick="history.back()" class="btn btn-primary">キャンセル</button>
               </div>
             </form>
           </div>
@@ -60,9 +48,4 @@
       </div>
     </div>
   </div>
-@endsection
-
-@section('scripts')
-  <!-- 共通部分 scripts.blade.phpを呼び出し-->
-  @include('share.flatpickr.scripts')
 @endsection

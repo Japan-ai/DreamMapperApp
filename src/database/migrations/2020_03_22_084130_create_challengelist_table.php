@@ -21,7 +21,7 @@ class CreateChallengelistTable extends Migration
             $table->integer('status')->default(1);//追加,デフォルト値は「未着手」
             $table->timestamps();
 
-            //外部キーの設定,challengelistテーブルのフォルダID列には、実際に存在するフォルダIDの値しか入れることができない
+            //外部キーの設定,challengelistテーブルのジャンルID列には、実際に存在するジャンルIDの値しか入れることができない
             $table->foreign('folder_id')->references('id')->on('folders');
         });
     }

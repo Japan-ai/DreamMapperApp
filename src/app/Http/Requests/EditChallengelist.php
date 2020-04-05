@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use App\ChallengeList;//追加
 use Illuminate\Validation\Rule;//追加
 
-//「チャレンジリスト編集時に入力された値」のバリデーションをおこなうファイル
+//「チャレンジリスト編集時に入力された値」のバリデーションテストに関するルール定義をおこなうファイル
 //タスクの作成と編集では状態欄の有無が異なるだけでタイトルと期限日は同一なので、EditChallengelistクラスは CreateChallengelistクラスを継承
 class EditChallengelist extends Createchallengelist
 {
@@ -41,7 +41,7 @@ class EditChallengelist extends Createchallengelist
         //「Challengelist::STATUS の各要素からlabelキーの値のみ取り出して作った配列」を左辺の変数に代入
         $status_labels = array_map(function($item) {
             return $item['label'];
-        }, Challengelist::STATUS);
+        }, ChallengeList::STATUS);
         
         $status_labels = implode('、', $status_labels);
 

@@ -10,7 +10,7 @@ class FoldersTableSeeder extends Seeder
      *
      * @return void
      */
-    //学び, 健康, 時間の３つのフォルダを作成。
+    //学び, 健康, 時間の３つのジャンルを作成。
     public function run()
     {
         //firstメソッドでユーザーを一行だけ取得して、そのIDをuser_idの値に指定
@@ -21,6 +21,7 @@ class FoldersTableSeeder extends Seeder
         foreach ($titles as $title) {
             DB::table('folders')->insert([
                 'title' => $title,
+                'user_id' => $user->id,
                 //Carbonライブラリを使用して現在日時を入力
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),

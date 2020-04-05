@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;//追加
+use Carbon\Carbon;//追加
 
 class UsersTableSeeder extends Seeder
 {
